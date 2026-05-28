@@ -1,0 +1,76 @@
+# mapping_set_id: CDISC_mapping
+# mapping_set_description: A manual mapping of the CDISC SDTM to a set of common elements.
+# license: CC-BY-4.0
+# curie_map:
+#     COMMSET: https://example.org/standardsharmonization/commset/
+#     CDISC: https://example.org/standardsharmonization/cdisc/
+#     skos: http://www.w3.org/2004/02/skos/core#
+#     orcid: https://orcid.org/
+# mapping_date: 2026-05-28
+# creator_id: orcid:0000-0002-8142-1856
+subject_id	predicate_id	object_id	mapping_justification	subject_label	example	object_category	object_label	comment	example_	confidence
+COMMSET:0001	skos:exactMatch	CDISC:0001	semapv:ManualMappingCuration	Treatment Start Date	2024-05-15 00:00:00	EX	EXSTDTC	"Correct; Format for Date/Time is ISO 8601; 
+See SDTMIG p. 38-39."	YYYY-MM-DDThh:mm:ss(.n+)?(((+|-)hh:mm)|Z)?	1.0
+COMMSET:0002	skos:exactMatch	CDISC:0002	semapv:ManualMappingCuration	Treatment End Date	2024-07-03 00:00:00	EX	EXENDTC	Correct; Format for Date/Time is ISO 8601	2023-12-15T13:14	1.0
+COMMSET:0003	skos:exactMatch	CDISC:0003	semapv:ManualMappingCuration	Total Dose Prescribed	60	EC	"ECOSE/ECDOSE + ECDOSU (ECMOOD=""SCHEDULED"")"	Recommend using ECMOOD= SCHEDULED and having another record for ECMOOD for PERFORMED in EC dataset to reflect that planned and completed procedure. See SDTMIG p.118, 119		1.0
+COMMSET:0004	skos:exactMatch	CDISC:0004	semapv:ManualMappingCuration	Total Dose Delivered	60	EX	EXDOSE + EXDOSU	EX is showing what was done. 		1.0
+COMMSET:0005	skos:exactMatch	CDISC:0005	semapv:ManualMappingCuration	Total Fractions Planned	30	EX	EXDPSREGM/Exposure Intended Dose Regimen	EXDPSREGM/Exposure Intended Dose Regimen	Check CDASHIG, p. 136 in Procedures domain. Since EX is an Interventions domain, the model supports the same variables in EX and PR. See the SDTM p. 12 for the list of variable for the model.	1.0
+COMMSET:0006	skos:exactMatch	CDISC:0006	semapv:ManualMappingCuration	Total Fractions Delivered	30	EX	Count EX records or SUPPEX (QNAM=TOTFRAC)	SUPPEXTOTFRC (six character limit… related to SAS)		1.0
+COMMSET:0007	skos:exactMatch	CDISC:0007	semapv:ManualMappingCuration	Dose per Fraction	2	EX	EXDOSE per fraction or SUPPEX (QNAM=DOSEFRAC)	SUPPEXDOSPFR (six char limit) - is SUPPEXDOSPFU needed to represent the units?		1.0
+COMMSET:0008	skos:exactMatch	CDISC:0008	semapv:ManualMappingCuration	Radiation Modality	Photon	DU	DUTESTCD=RADMOD + DUTEST=Radiation Modality + DUORRES	DUTESTCD=RADMOD; DUTEST=Radiation Modality; DUORRES=Photon	DUORRES=Photon	1.0
+COMMSET:0009	skos:exactMatch	CDISC:0009	semapv:ManualMappingCuration	Treatment Technique	IMRT	EX	EXTRT	EXTRT		1.0
+COMMSET:0010	skos:exactMatch	CDISC:0010	semapv:ManualMappingCuration	Treatment Site	Lung, Right Upper Lobe	EX	EXLOC + EXLAT	Not sure what +Â means. EXLOC; EXLAT		1.0
+COMMSET:0011	skos:exactMatch	CDISC:0011	semapv:ManualMappingCuration	Treatment Intent	Curative	EX	SUPPEX.TRTINT/Treatment Intent	"The CAT variable is not controlled and could be used to differentiate types of treatments.
+
+Recommend SUPPEX.TRTINT /Treatment Intent
+Example in Breast Cancer Tab from Br Ca TAUG"		1.0
+COMMSET:0012	skos:exactMatch	CDISC:0012	semapv:ManualMappingCuration	Patient ID	MRN-789456	DM	USUBJID			1.0
+COMMSET:0013	skos:exactMatch	CDISC:0013	semapv:ManualMappingCuration	Date of Birth	1958-04-23 00:00:00	DM	BRTHDTC			1.0
+COMMSET:0014	skos:exactMatch	CDISC:0014	semapv:ManualMappingCuration	Gender	Male	DM	SEX			1.0
+COMMSET:0015	skos:exactMatch	CDISC:0015	semapv:ManualMappingCuration	Primary Diagnosis	C34.1	MH	MHTERM / MHDECOD			1.0
+COMMSET:0016	skos:exactMatch	CDISC:0016	semapv:ManualMappingCuration	Histology	8140/3	MH	"MHCAT=""HISTOLOGY""; MHTERM"		"Adenocarcinoma, NOS. Generally the display name is used for the MHTERM.
+"	1.0
+COMMSET:0017	skos:exactMatch	CDISC:0017	semapv:ManualMappingCuration	TNM Stage	T2aN1M0	RS	"RSTESTCD=""TNM""; RSORRES"	"RSTEST=AJCC1-Anatomic Stage; RSTESTCD=AJCC101; RSORRES
+https://www.cdisc.org/standards/foundational/qrs/ajcc-tnm-staging-system-7th-edition
+
+See Lunc Ca Tab and the Lung Cancer TAUG."		0.5
+COMMSET:0018	skos:exactMatch	CDISC:0018	semapv:ManualMappingCuration	Disease Status	Initial	RS	RECIST	"Could use RSTESTCD-DISSTT; RSTEST=Disease Status; However, it is not controlled so likely will prevent aggregation across studies. Typically the RECIST critier is used: https://www.cdisc.org/standards/foundational/qrs/response-evaluation-criteria-solid-tumors-version-1-1
+
+https://pubmed.ncbi.nlm.nih.gov/19097774/
+
+See Lung Cancer tab.
+"		0.5
+COMMSET:0019	skos:exactMatch	CDISC:0019	semapv:ManualMappingCuration	Days Interrupted - Toxicity	2	DS	"DSTERM; DSDECOD=""ADVERSEÂ EVENT""; SUPPDS(INTDAYS)"	Not sure what the objective is. It seems to show in Disposition the relationship between the AE and the Interruption. Agree with this.		0.5
+COMMSET:0020	skos:exactMatch	CDISC:0020	semapv:ManualMappingCuration	Reason for Interruption	Grade 2 fatigue	DS	DSTERM free text; DSDECOD coded	"Generally, the start and stop date are used. The SUPPEX variable of REASINT/Reason for Interruption can be used to represent this information.
+
+DS domain is used to provide Protocol Milestones, Non-completion and other events using the following Controlled Terminology Codelists:
+https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.html#CL.C66727.NCOMPLT
+https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.html#CL.C114118.PROTMLST
+https://evs.nci.nih.gov/ftp1/CDISC/SDTM/SDTM%20Terminology.html#CL.C150811.OTHEVENT
+
+Disposition Domain - SDTMIG p. 155
+https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-4
+
+
+"		0.5
+COMMSET:0021	skos:exactMatch	CDISC:0021	semapv:ManualMappingCuration	Days Interrupted - Other	1	DS	"DSTERM; DSDECOD=""OTHER"""	"Not sure what concept this is for. Duration of the days interrupted? Reason for the days interrupted with a set valueset and a response of ""other, specify""?"		0.5
+COMMSET:0022	skos:exactMatch	CDISC:0022	semapv:ManualMappingCuration	Reason for Interruption	Equipment maintenance	DS	DSTERM / DSDECOD		PRREASND	0.5
+COMMSET:0023	skos:exactMatch	CDISC:0023	semapv:ManualMappingCuration	Unplanned Treatment Breaks	Yes	DS	"DSTERM=""UNPLANNEDÂ BREAK"""			0.5
+COMMSET:0024	skos:exactMatch	CDISC:0024	semapv:ManualMappingCuration	Immobilization Device	Wing board, arm cradle	PR	"PRTRT; PRCAT=""IMMOBILIZATION"""		"DI, SPDEVID in PR dataset; agree with PRCAT of ""Immobilization"". Note that the assumption was the radiation therapy was the experimental study treatment thus it would be in EX dataset and not PR. Only one dataset for the procedure. If not under study use PR."	0.5
+COMMSET:0025	skos:exactMatch	CDISC:0025	semapv:ManualMappingCuration	Image Guidance Method	CBCT	DU	DUTESTCD=IMGMTH + DUTEST=Imaging Guidance Method + DUORRES		DUTESTCD=IMGMTH; DUTEST=Imaging Guidance Method; DUORRES=CBCT	1.0
+COMMSET:0026	skos:exactMatch	CDISC:0026	semapv:ManualMappingCuration	Image Guidance Frequency	Daily	EX	EXDOSFRQ	Frequency would be linked to the EXDOSFRQ; this seems like it is another concept related to the imaging settings so that is the assumption for the answer.	DUTESTCD=IMGFRQ; DUTEST=Imaging Guidance Frequency; DUORRES	0.5
+COMMSET:0027	skos:exactMatch	CDISC:0027	semapv:ManualMappingCuration	Motion Assessment Method	4DCT	DU	DUTESTCD=IMMTAM + DUTEST=Imaging Motion Assessment Method	Assumption that these are settings	DUTESTCD=IMMTAM; DUTEST=Imaging Motion Assessment Method	0.5
+COMMSET:0028	skos:exactMatch	CDISC:0028	semapv:ManualMappingCuration	Motion Management Technique	ABC gating	DU	DUTESTCD=IMMOMT; DUTEST=Imaging Motion Management Technique	Assumption that these are settings	DUTESTCD=IMMOMT; DUTEST=Imaging Motion Management Technique	0.5
+COMMSET:0029	skos:exactMatch	CDISC:0029	semapv:ManualMappingCuration	Re-planning Required	Yes	PR	PROCCUR Y/N or DS event	Not sure what concept this is for. Seems like a question of whether or not the radation therapy had to be rescheduled. Consider a SUPPPR for the concept.		0.5
+COMMSET:0030	skos:exactMatch	CDISC:0030	semapv:ManualMappingCuration	Re-planning Reason	Weight loss	DS	DSTERM / DSDECOD	Not sure what the concept is. Seems like it is the reason the radiation therapy had to be rescheduled. If yes, consider a SUPPPR related to the rescheduling reason.		0.5
+COMMSET:0031	skos:exactMatch	CDISC:0031	semapv:ManualMappingCuration	Number of Plan Versions	2	PR	SUPPPR (QNAM=PLANVRS)	Not sure what the concept is. 		0.5
+COMMSET:0032	skos:exactMatch	CDISC:0032	semapv:ManualMappingCuration	Adaptive Technique Used	Offline	PR	"PRTRT; PROCAT=""ADAPTIVE"""		DU, DUTESTCD=IMRTTQ; DUTEST=Imaging Radiation Therapy Technique 	0.5
+COMMSET:0033	skos:exactMatch	CDISC:0033	semapv:ManualMappingCuration	Treatment Completion Status	Completed	DS	"DSTERM=""COMPLETED""; DSDECOD from NCOMPLT"	"Generally the DS (Disposition) domain is the subject disposition through the study protocol, not the disposition of a study visit. For treatment completion consider recording the treatments in EX as EXTRT. The Subject Visits would reflect the encounter, the EXTRT would reflect the completion of the treatment. If there is a scenario where they would start the treatment and stop it (incomplete treatment) consider using the dose to reflect this or use a SUPPEX; QNAM=CMPTRT; QLABEL=Completed Treatment. (Definition in NSV registry = An indication of whether or not the subject completed the intended regimen.)
+"		1.0
+COMMSET:0034	skos:exactMatch	CDISC:0034	semapv:ManualMappingCuration	Reason if Incomplete		DS	DSTERM; DSDECOD	SUPPEX; QNAM=EXRSDISC; QLABEL=Reason for Discontinuation 		0.5
+COMMSET:0035	skos:exactMatch	CDISC:0035	semapv:ManualMappingCuration	Date of Last Follow-up	2024-10-03 00:00:00	SS	"SSDTC; SSTESTCD=""SURVSTAT"""	"2024-10-03; SSDTC; SSTEST=Survival Status; SSTESTCD=SURVSTAT; DM dataset; RFPENDTC Date/Time of End of Participation
+
+ISO 8601 standard for date/time"		0.5
+COMMSET:0036	skos:exactMatch	CDISC:0036	semapv:ManualMappingCuration	Response Evaluation	CR	RS	"RSTESTCD=""OVRLRESP""; RSSTRESC"	Note that in the RSTESTCD and RSTEST notes the value in the RSCAT determines which codelist is used. SDTMIG v3.4, p. 329 and 330.		1.0
+COMMSET:0037	skos:exactMatch	CDISC:0037	semapv:ManualMappingCuration	Time to Response	90	ADaM	ADTTE/ADRS derived			0.5
+COMMSET:0038	skos:exactMatch	CDISC:0038	semapv:ManualMappingCuration	Local Control Status	Controlled	RS	"RSTESTCD=""LOCALÂ CONTROL""; RSSTRESC"	"Not sure what ""Local Control Status"" means and what the context is."		0.5
